@@ -1,0 +1,25 @@
+﻿@model docentliksitesi.ViewModels.KonuFormViewModel
+@{
+    ViewBag.Title = "Konular";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Konular Formu</h2>
+@using (Html.BeginForm("Kaydetkonu", "Admin", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Konular.alanid)
+        @Html.DropDownListFor(m => m.Konular.alanid, new SelectList(Model.Alanlars, "id", "alanadi"), "Alan seçiniz", new { @class = "form-control" })
+    </div>
+    <div class="form-group" style="margin-top:50px;">
+        @Html.LabelFor(m => m.Konular.konuadi)
+        @Html.TextBoxFor(m => m.Konular.konuadi, new { @class = "form-control" })
+    </div>
+    <div class="form-group" style="margin-top:50px;">
+        @Html.LabelFor(m => m.Konular.ustlimit)
+        @Html.TextBoxFor(m => m.Konular.ustlimit, new { @class = "form-control" })
+    </div>
+
+    @Html.HiddenFor(m => m.Konular.id)
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+}

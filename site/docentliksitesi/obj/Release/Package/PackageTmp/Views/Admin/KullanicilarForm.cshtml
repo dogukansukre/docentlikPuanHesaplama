@@ -1,0 +1,24 @@
+﻿@model docentliksitesi.Models.EntityFramework.admin
+@{
+    ViewBag.Title = "KullaniciForm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <h2>Kullanicilar</h2>
+@using (Html.BeginForm("KaydetKullanici", "Admin", FormMethod.Post))
+{
+    <div class="form-group">
+       
+
+        @Html.LabelFor(m => m.kullaniciAdi)
+        @Html.TextBoxFor(m => m.kullaniciAdi, new { @class = "form-control" })
+
+        @Html.LabelFor(m => m.sifre)
+        @Html.TextBoxFor(m => m.sifre, new { @class = "form-control" })
+
+
+    </div>
+    @Html.HiddenFor(m => m.id)
+    <button type="submit" class="btn btn-success">Kaydet</button>
+}
+

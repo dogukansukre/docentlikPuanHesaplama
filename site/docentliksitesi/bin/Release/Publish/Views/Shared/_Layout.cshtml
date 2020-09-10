@@ -1,0 +1,77 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <title>Akademik Paylaşım</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta name="description" content="Akademik paylaşım" />
+    <meta name="keywords" content="akademik paylaşım, doçentlik puan hesaplama, akademik teşvik puanı hesaplama" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
+    <link rel="stylesheet" type="text/css" href="~/vendor/bootstrap/css/bootstrap.min.css">
+
+    <link href="~/fonts/icomoon/style.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/magnific-popup.css" rel="stylesheet" />
+    <link href="~/css/jquery-ui.css" rel="stylesheet" />
+
+    <link href="~/css/owl.carousel.min.css" rel="stylesheet" />
+
+    <link href="~/css/owl.theme.default.min.css" rel="stylesheet" />
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163765951-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-163765951-1');
+    </script>
+
+    <link href="~/css/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/animsition/css/animsition.min.css">
+
+</head>
+<body>
+
+    <div class="site-wrap">
+        <!-- Header -->
+        @Html.Partial("_Header")
+        <div class="container">
+            @RenderBody()
+        </div>
+        <!-- Footer -->
+        @Html.Partial("_Footer")
+        <!-- Back to top -->
+    </div>
+    <script src="~/vendor/sweetalert/sweetalert2.all.min.js"></script>
+    <script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="~/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/vendor/animsition/js/animsition.min.js"></script>
+
+    <script src="~/js/slick.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/aos.js"></script>
+
+</body>
+</html>

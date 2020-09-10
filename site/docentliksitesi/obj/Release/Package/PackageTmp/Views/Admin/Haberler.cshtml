@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Haberler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+    <a class="btn btn-success" href="/Admin/YeniHaber">Yeni Haber</a>
+</div>
+<h2>Haber Listesi</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Haber Id</th>
+            <th>Haber Ad</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    @foreach (var Haberler in Model)
+    {
+        <tr>
+            <td>@Haberler.haberid</td>
+            <td>@Haberler.haberbaslik</td>
+            <td><a class="btn btn-primary" href="/Admin/GuncelleHaber/@Haberler.haberid">Güncelle</a></td>
+            <td><a class="btn btn-danger" href="/Admin/SilHaber/@Haberler.haberid">Sil</a></td>
+        </tr>
+
+    }
+
+</table>

@@ -1,0 +1,33 @@
+﻿@model List<docentliksitesi.Models.EntityFramework.Konular>
+@{
+    ViewBag.Title = "Konular";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+   @Html.ActionLink("Yeni Konular","Yenikonu",null,new {@class="btn btn-success"})
+</div>
+<h2>Konular Listesi</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Alan Ad</th>
+            <th>Konu Ad</th>
+            <th>Üst Limit</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    @foreach (var Konular in Model)
+    {
+        <tr> 
+            <td>@Konular.Alanlar.alanadi</td>           
+            <td>@Konular.konuadi</td>
+            <td>@Konular.ustlimit</td>
+            <td><a class="btn btn-primary" href="/Admin/GuncelleKonu/@Konular.id">Güncelle</a></td>
+            <td><a class="btn btn-danger" href="/Admin/SilKonu/@Konular.id">Sil</a></td>
+        </tr>
+
+    }
+
+</table>

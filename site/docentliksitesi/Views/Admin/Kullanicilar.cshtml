@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Kullanicilar";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <a class="btn btn-success" href="/Admin/YeniKullanici">Yeni Kullanıcı</a>
+</div>
+<h2>Kullanıcılar Listesi</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>            
+            <th>Kullanıcı Adı</th>
+            <th>Şifre</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    @foreach (var admin in Model)
+    {
+        <tr>         
+            <td>@admin.kullaniciAdi</td>
+            <td>@admin.sifre</td>
+            <td><a class="btn btn-primary" href="/Admin/GuncelleKullanici/@admin.id">Güncelle</a></td>
+            <td><a class="btn btn-danger" href="/Admin/SilKullanici/@admin.id">Sil</a></td>
+        </tr>
+
+    }
+
+</table>

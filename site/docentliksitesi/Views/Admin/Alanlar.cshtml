@@ -1,0 +1,29 @@
+﻿@model List<docentliksitesi.Models.EntityFramework.Alanlar>
+@{
+    ViewBag.Title = "Alanlar";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <a class="btn btn-success" href="/Admin/Yeni">Yeni Alan</a>
+</div>
+<h2>Alanlar Listesi</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>          
+            <th>Alan Ad</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    @foreach (var Alanlar in Model)
+    {
+        <tr>
+            <td>@Alanlar.alanadi</td>
+            <td><a class="btn btn-primary" href="/Admin/Guncelle/@Alanlar.id">Güncelle</a></td>
+            <td><a class="btn btn-danger" href="/Admin/Sil/@Alanlar.id">Sil</a></td>
+        </tr>
+
+    }
+
+</table>

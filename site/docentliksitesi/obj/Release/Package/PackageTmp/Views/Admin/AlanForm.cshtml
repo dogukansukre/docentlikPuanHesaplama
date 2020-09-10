@@ -1,0 +1,21 @@
+﻿@model docentliksitesi.Models.EntityFramework.Alanlar
+@{
+    ViewBag.Title = "AlanForm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("Kaydet","Admin",FormMethod.Post))
+{
+    <div class="form-group">
+
+
+        @Html.LabelFor(m => m.alanadi)
+        @Html.TextBoxFor(m => m.alanadi, new { @class = "form-control" })
+
+
+    </div>
+    @Html.HiddenFor(m=>m.id)
+    <button type="submit" class="btn btn-success">Kaydet</button>
+}
+

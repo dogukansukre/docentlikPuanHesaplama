@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="tezModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Alanlar">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="alanadi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Konular" Relationship="Self.FK_Konular_Alanlar" FromRole="Alanlar" ToRole="Konular" />
+  </EntityType>
+  <EntityType Name="İcerikler">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="icerikadi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="puan" Type="Int32" />
+    <Property Name="alanid" Type="Int32" />
+    <Property Name="kosulno" Type="Int32" />
+    <NavigationProperty Name="Konular" Relationship="Self.FK_İcerikler_Konular" FromRole="İcerikler" ToRole="Konular" />
+  </EntityType>
+  <EntityType Name="Konular">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="konuadi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="kosulno" Type="Int32" />
+    <NavigationProperty Name="Alanlar" Relationship="Self.FK_Konular_Alanlar" FromRole="Konular" ToRole="Alanlar" />
+    <NavigationProperty Name="İcerikler" Relationship="Self.FK_İcerikler_Konular" FromRole="Konular" ToRole="İcerikler" />
+  </EntityType>
+  <Association Name="FK_Konular_Alanlar">
+    <End Role="Alanlar" Type="Self.Alanlar" Multiplicity="0..1" />
+    <End Role="Konular" Type="Self.Konular" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_İcerikler_Konular">
+    <End Role="Konular" Type="Self.Konular" Multiplicity="0..1" />
+    <End Role="İcerikler" Type="Self.İcerikler" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="docentEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admin" EntityType="Self.admin" />
+    <EntitySet Name="Alanlar" EntityType="Self.Alanlar" />
+    <EntitySet Name="İcerikler" EntityType="Self.İcerikler" />
+    <EntitySet Name="Konular" EntityType="Self.Konular" />
+    <AssociationSet Name="FK_Konular_Alanlar" Association="Self.FK_Konular_Alanlar">
+      <End Role="Alanlar" EntitySet="Alanlar" />
+      <End Role="Konular" EntitySet="Konular" />
+    </AssociationSet>
+    <AssociationSet Name="FK_İcerikler_Konular" Association="Self.FK_İcerikler_Konular">
+      <End Role="Konular" EntitySet="Konular" />
+      <End Role="İcerikler" EntitySet="İcerikler" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

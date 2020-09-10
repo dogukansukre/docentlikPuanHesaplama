@@ -1,0 +1,29 @@
+﻿@model docentliksitesi.ViewModels.KonuFormViewModel
+@{
+    ViewBag.Title = "IcerikForm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>İçerik Formu</h2>
+@using (Html.BeginForm("Kaydeticerik", "Admin", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.İcerikler.alanid)
+        @Html.DropDownListFor(m => m.İcerikler.alanid, new SelectList(Model.Alanlars, "id", "alanadi"), "Konu Seçiniz", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.İcerikler.konuid)
+        @Html.DropDownListFor(m => m.İcerikler.konuid, new SelectList(Model.Konulars, "id", "konuadi"), "Konu Seçiniz", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.İcerikler.icerikadi)
+        @Html.TextBoxFor(m => m.İcerikler.icerikadi, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.İcerikler.puan)
+        @Html.TextBoxFor(m => m.İcerikler.puan, new { @class = "form-control" })
+    </div>
+
+    @Html.HiddenFor(m => m.İcerikler.id)
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+}

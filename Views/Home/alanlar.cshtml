@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Alanlar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="container bg-light border pb-2">
+        <nav class="navbar navbar-light ">
+            <form class="form-inline">
+                <input class="form-control mr-sm-2 srch" type="text" placeholder="Поиск">
+            </form>
+        </nav>
+        <div id="accordion" role="tablist">
+            <div class="card">
+                <div class="card-header" role="tab" id="headingOne">
+                    <span class="badge badge-primary badge-pill incat-count">0</span>
+                    <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Отдел КНО
+                    </a>
+                </div>
+                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="card-body p-0">
+                        <ul class="list-group cat-list">
+                            <li class="list-group-item">Иванов Петр Иванович</li>
+                            <li class="list-group-item">Петров Дмитрий Егорович</li>
+                            <li class="list-group-item">Сидорова Галина Олеговна</li>
+                            <li class="list-group-item">Масичкина Люблюка Зайковна</li>
+                            <li class="list-group-item">Галкин Максим Иванович</li>
+                            <li class="list-group-item">Егоров Роман Юрьевич</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" role="tab" id="headingTwo">
+
+                    <span class="badge badge-primary badge-pill incat-count">0</span>
+                    <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Отдел ФО
+                    </a>
+
+                </div>
+                <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="card-body p-0">
+                        <ul class="list-group cat-list">
+                            <li class="list-group-item">Юрьев Олег Петрович</li>
+                            <li class="list-group-item">Максимов Юрий Сидорович</li>
+                            <li class="list-group-item">Андреев Егор Анатольевич</li>
+                            <li class="list-group-item">Сергеев Иван Вадимович</li>
+                            <li class="list-group-item">Вадимов Анатолий Владимирович</li>
+                            <li class="list-group-item">Медвепутов Владимир Михайлович</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

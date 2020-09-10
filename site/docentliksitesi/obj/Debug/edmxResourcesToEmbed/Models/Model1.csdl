@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="tezModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kullaniciAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="sifre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Alanlar">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="alanadi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Konular" Relationship="Self.FK_Konular_Alanlar" FromRole="Alanlar" ToRole="Konular" />
+  </EntityType>
+  <EntityType Name="Haberler">
+    <Key>
+      <PropertyRef Name="haberid" />
+    </Key>
+    <Property Name="haberid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="haberbaslik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="habericerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="haberlink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="İcerikler">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="icerikadi" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="puan" Type="Int32" />
+    <Property Name="konuid" Type="Int32" />
+    <Property Name="alanid" Type="Int32" />
+    <NavigationProperty Name="Konular" Relationship="Self.FK_İcerikler_Konular" FromRole="İcerikler" ToRole="Konular" />
+  </EntityType>
+  <EntityType Name="Konular">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="konuadi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="alanid" Type="Int32" />
+    <Property Name="ustlimit" Type="Int32" />
+    <NavigationProperty Name="Alanlar" Relationship="Self.FK_Konular_Alanlar" FromRole="Konular" ToRole="Alanlar" />
+    <NavigationProperty Name="İcerikler" Relationship="Self.FK_İcerikler_Konular" FromRole="Konular" ToRole="İcerikler" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Konular_Alanlar">
+    <End Role="Alanlar" Type="Self.Alanlar" Multiplicity="0..1" />
+    <End Role="Konular" Type="Self.Konular" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Alanlar">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Konular">
+        <PropertyRef Name="alanid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_İcerikler_Konular">
+    <End Role="Konular" Type="Self.Konular" Multiplicity="0..1" />
+    <End Role="İcerikler" Type="Self.İcerikler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Konular">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="İcerikler">
+        <PropertyRef Name="konuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="tezEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admin" EntityType="Self.admin" />
+    <EntitySet Name="Alanlar" EntityType="Self.Alanlar" />
+    <EntitySet Name="Haberler" EntityType="Self.Haberler" />
+    <EntitySet Name="İcerikler" EntityType="Self.İcerikler" />
+    <EntitySet Name="Konular" EntityType="Self.Konular" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="FK_Konular_Alanlar" Association="Self.FK_Konular_Alanlar">
+      <End Role="Alanlar" EntitySet="Alanlar" />
+      <End Role="Konular" EntitySet="Konular" />
+    </AssociationSet>
+    <AssociationSet Name="FK_İcerikler_Konular" Association="Self.FK_İcerikler_Konular">
+      <End Role="Konular" EntitySet="Konular" />
+      <End Role="İcerikler" EntitySet="İcerikler" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

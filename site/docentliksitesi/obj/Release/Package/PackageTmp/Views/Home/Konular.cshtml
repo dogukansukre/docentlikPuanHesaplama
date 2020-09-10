@@ -1,0 +1,244 @@
+﻿@using docentliksitesi.Models
+@model List<Konular>
+@{
+    ViewBag.Title = "Alanlar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="accordion" id="accordionExample" style="margin-top:20px; color:black; overflow: hidden;">
+
+    @{int i = 0;}
+    @foreach (var Konular in Model)
+    {
+        i++;
+        <div class="card" style=" margin-bottom:10px; word-wrap:break-word; background: #b2bec3;">
+            <div class="card-header show-collapse" id="heading-@Konular.id" style="background: #b2bec3; font-size: 1rem;  font-weight: 400; color: black ">
+              
+                    <a data-toggle="collapse" data-target="#collapse-@Konular.id" aria-expanded="true" aria-controls="collapse-@Konular.id">
+                       @i - @Konular.konuadi
+                    </a>
+                
+            </div>
+
+            <div id="collaps-@Konular.id" class="collapse" aria-labelledby="heading-@Konular.id"  data-parent="#accordionExample">
+                <div class="card-body" style="padding:0.5rem;">
+
+
+                    <table class="table table-bordered" style="color:black;">
+                        <thead style=" background: #d1d8e0; font-weight:400; ">
+                            <tr>
+                                <td><b>#</b></td>
+                                <td><b>Faaliyet</b></td>
+                                <td><b>Puan</b></td>
+                                <td><b>İşlemler</b></td>
+                            </tr>
+                        </thead>
+                        <tbody style=" background:#dfe6e9;">
+                            @{string alp = "abcdefghijklmnopqrstuvwxyz"; int j = 0;}
+                            @foreach (var icerikler in @Konular.İcerikler)
+                            {
+                                char cht = alp[j];
+                                j++;
+                                <tr>
+
+                                    <td>@cht</td>
+                                    <td>@icerikler.icerikadi</td>
+                                    <td>@icerikler.puan</td>
+                                    <td>
+                                        <a class="btn btn-success show-add-model" data-point="@icerikler.puan" data-topic="@Konular.id" data-topicname="@Konular.konuadi" data-id="@i-@cht" data-limit="@Konular.ustlimit">Ekle</a>
+
+                                    </td>
+
+                                </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<hr />
+<h4 style="margin-top: 60px; color: black">Doktora Öncesi</h4>
+<table class="table table-bordered" style="font-size: 1rem;">
+    <thead style="background:#b2bec3; color:black;">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Konu</th>
+            <th scope="col">Kişi</th>
+            <th scope="col">Adet</th>
+            <th scope="col">Puan</th>
+            <th scope="col">Sonuç</th>
+            <th scope="col">Sil</th>
+        </tr>
+    </thead>
+    <tbody id="docent-once-table" style="background: #dfe6e9; color: black">
+ </tbody>
+</table>
+<hr />
+<h4 style="margin-top:60px; color:black">Doktora Sonrası</h4>
+<table class="table table-bordered" style="font-size: 1rem;">
+    <thead style="background:#b2bec3; color:black;">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Konu</th>
+            <th scope="col">Kişi</th>
+            <th scope="col">Adet</th>
+            <th scope="col">Puan</th>
+            <th scope="col">Sonuç</th>
+            <th scope="col">Sil</th>
+        </tr>
+    </thead>
+    <tbody id="docent-sonra-table" style="background:#dfe6e9; color:black">
+    </tbody>
+</table>
+<hr />
+
+<h3 style="margin-top:60px; color:black">Toplam Hesaplama</h3>
+<table class="table table-bordered" style="font-size: 1rem;">
+    <thead style="background: #b2bec3; color: black;">
+        <tr>
+            <th scope="col">Faaliyet Türü</th>
+            <th scope="col">Puan</th>
+        </tr>
+    </thead>
+    <tbody id="faliyet-hesap-table" style="background:#d1d8e0; color:black">
+    </tbody>
+    <tbody style="background:#dfe6e9; color:black">
+        <tr>
+            <td>Doktora Öncesi</td>
+            <td id="docent-once">0</td>
+        </tr>
+        <tr>
+            <td>Doktora Sonrası</td>
+            <td id="docent-sonra">0</td>
+        </tr>
+        <tr>
+            <td><b>Genel Toplam</b></td>
+            <td id="docent-toplam">0</td>
+        </tr>
+        <tr>
+            <td><b>Değerlendirme</b></td>
+            <td id="basari-toplam" style="color:red;"><b>Başvuramaz</b></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top:170px">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">SEÇENEKLER</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="point-modal" />
+                <input type="hidden" id="id-modal" />
+                <div class="form-group row">
+                    <input type="hidden" id="modal-topic" />
+                    <input type="hidden" id="modal-topicname" />
+                    <input type="hidden" id="modal-limit" />
+                    <label class="col-sm-6">
+                        Kaç adet ?
+                    </label>
+                    <div class="col-sm-6">
+                        <select title="bbbb" name="adet" id="modal-adet" class="custom-select">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-6">
+                        Kaç kişi yapıldı?
+                    </label>
+                    <div class="col-sm-6">
+                        <select title="aaaa" name="kisi" id="modal-kisi" class="custom-select">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-6">
+                        Doktora öncesi/sonrası?
+                    </label>
+                    <div class="col-sm-6">
+                        <select name="doktor" id="modal-cevap" class="custom-select">
+                            <option value="true">Doktora öncesi</option>
+                            <option value="false">Doktora sonrası</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary" onclick="modal_hesapla()">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>

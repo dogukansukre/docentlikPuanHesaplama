@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="tezModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullaniciAdi" Type="nvarchar(max)" />
+          <Property Name="sifre" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Alanlar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="alanadi" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Haberler">
+          <Key>
+            <PropertyRef Name="haberid" />
+          </Key>
+          <Property Name="haberid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="haberbaslik" Type="nvarchar(max)" />
+          <Property Name="habericerik" Type="nvarchar(max)" />
+          <Property Name="haberlink" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="İcerikler">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="icerikadi" Type="nvarchar" MaxLength="4000" />
+          <Property Name="puan" Type="int" />
+          <Property Name="konuid" Type="int" />
+          <Property Name="alanid" Type="int" />
+        </EntityType>
+        <EntityType Name="Konular">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="konuadi" Type="nvarchar" MaxLength="150" />
+          <Property Name="alanid" Type="int" />
+          <Property Name="ustlimit" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_İcerikler_Konular">
+          <End Role="Konular" Type="Self.Konular" Multiplicity="0..1" />
+          <End Role="İcerikler" Type="Self.İcerikler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Konular">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="İcerikler">
+              <PropertyRef Name="konuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Konular_Alanlar">
+          <End Role="Alanlar" Type="Self.Alanlar" Multiplicity="0..1" />
+          <End Role="Konular" Type="Self.Konular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alanlar">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Konular">
+              <PropertyRef Name="alanid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tezModelStoreContainer">
+          <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Alanlar" EntityType="Self.Alanlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Haberler" EntityType="Self.Haberler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="İcerikler" EntityType="Self.İcerikler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Konular" EntityType="Self.Konular" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_İcerikler_Konular" Association="Self.FK_İcerikler_Konular">
+            <End Role="Konular" EntitySet="Konular" />
+            <End Role="İcerikler" EntitySet="İcerikler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Konular_Alanlar" Association="Self.FK_Konular_Alanlar">
+            <End Role="Alanlar" EntitySet="Alanlar" />
+            <End Role="Konular" EntitySet="Konular" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="tezModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullaniciAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sifre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Alanlar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="alanadi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Konular" Relationship="Self.FK_Konular_Alanlar" FromRole="Alanlar" ToRole="Konular" />
+        </EntityType>
+        <EntityType Name="Haberler">
+          <Key>
+            <PropertyRef Name="haberid" />
+          </Key>
+          <Property Name="haberid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="haberbaslik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="habericerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="haberlink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="İcerikler">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="icerikadi" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="puan" Type="Int32" />
+          <Property Name="konuid" Type="Int32" />
+          <Property Name="alanid" Type="Int32" />
+          <NavigationProperty Name="Konular" Relationship="Self.FK_İcerikler_Konular" FromRole="İcerikler" ToRole="Konular" />
+        </EntityType>
+        <EntityType Name="Konular">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="konuadi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="alanid" Type="Int32" />
+          <Property Name="ustlimit" Type="Int32" />
+          <NavigationProperty Name="Alanlar" Relationship="Self.FK_Konular_Alanlar" FromRole="Konular" ToRole="Alanlar" />
+          <NavigationProperty Name="İcerikler" Relationship="Self.FK_İcerikler_Konular" FromRole="Konular" ToRole="İcerikler" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Konular_Alanlar">
+          <End Role="Alanlar" Type="Self.Alanlar" Multiplicity="0..1" />
+          <End Role="Konular" Type="Self.Konular" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alanlar">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Konular">
+              <PropertyRef Name="alanid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_İcerikler_Konular">
+          <End Role="Konular" Type="Self.Konular" Multiplicity="0..1" />
+          <End Role="İcerikler" Type="Self.İcerikler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Konular">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="İcerikler">
+              <PropertyRef Name="konuid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tezEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admin" EntityType="Self.admin" />
+          <EntitySet Name="Alanlar" EntityType="Self.Alanlar" />
+          <EntitySet Name="Haberler" EntityType="Self.Haberler" />
+          <EntitySet Name="İcerikler" EntityType="Self.İcerikler" />
+          <EntitySet Name="Konular" EntityType="Self.Konular" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Konular_Alanlar" Association="Self.FK_Konular_Alanlar">
+            <End Role="Alanlar" EntitySet="Alanlar" />
+            <End Role="Konular" EntitySet="Konular" />
+          </AssociationSet>
+          <AssociationSet Name="FK_İcerikler_Konular" Association="Self.FK_İcerikler_Konular">
+            <End Role="Konular" EntitySet="Konular" />
+            <End Role="İcerikler" EntitySet="İcerikler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="tezModelStoreContainer" CdmEntityContainer="tezEntities2">
+          <EntitySetMapping Name="admin">
+            <EntityTypeMapping TypeName="tezModel.admin">
+              <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="kullaniciAdi" ColumnName="kullaniciAdi" />
+                <ScalarProperty Name="sifre" ColumnName="sifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Alanlar">
+            <EntityTypeMapping TypeName="tezModel.Alanlar">
+              <MappingFragment StoreEntitySet="Alanlar">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="alanadi" ColumnName="alanadi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Haberler">
+            <EntityTypeMapping TypeName="tezModel.Haberler">
+              <MappingFragment StoreEntitySet="Haberler">
+                <ScalarProperty Name="haberid" ColumnName="haberid" />
+                <ScalarProperty Name="haberbaslik" ColumnName="haberbaslik" />
+                <ScalarProperty Name="habericerik" ColumnName="habericerik" />
+                <ScalarProperty Name="haberlink" ColumnName="haberlink" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="İcerikler">
+            <EntityTypeMapping TypeName="tezModel.İcerikler">
+              <MappingFragment StoreEntitySet="İcerikler">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="icerikadi" ColumnName="icerikadi" />
+                <ScalarProperty Name="puan" ColumnName="puan" />
+                <ScalarProperty Name="konuid" ColumnName="konuid" />
+                <ScalarProperty Name="alanid" ColumnName="alanid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Konular">
+            <EntityTypeMapping TypeName="tezModel.Konular">
+              <MappingFragment StoreEntitySet="Konular">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="konuadi" ColumnName="konuadi" />
+                <ScalarProperty Name="alanid" ColumnName="alanid" />
+                <ScalarProperty Name="ustlimit" ColumnName="ustlimit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="tezModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

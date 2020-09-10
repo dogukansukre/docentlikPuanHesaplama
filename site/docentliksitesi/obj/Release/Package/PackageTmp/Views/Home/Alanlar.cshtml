@@ -1,0 +1,68 @@
+﻿@using docentliksitesi.Models
+@model List<Alanlar>
+@{
+    ViewBag.Title = "Alanlar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="container">
+        @*  Reklamlar
+            
+            <div class="container mt-3" style="width:30%;  float:right;">
+
+            <div class="card" style="background:#dfe6e9; margin-top:2vw;">
+                <div class="card-body">
+
+                </div>
+
+            </div>
+            <div class="card" style="background: #dfe6e9; margin-top:2vw; ">
+
+                <div class="card-body">
+
+                </div>
+
+            </div>
+            <div class="card" style="background: #dfe6e9; margin-top:2vw; ">
+
+                <div class="card-body">
+
+                </div>
+
+            </div>
+            <div class="card" style="background: #dfe6e9; margin-top:2vw; ">
+
+                <div class="card-body">
+
+                </div>
+
+            </div>
+
+        </div>*@
+
+        <div style="margin-top:20px; color:black; overflow: hidden; width:70%; float:left">
+
+            @{int i = 0;}
+            @foreach (var Alanlar in Model)
+            {
+                i++;
+                <div class="card" style="        margin-bottom: 15px;
+        background: #b2bec3;
+        overflow: hidden;
+        font-weight: 400;
+        font-size: 1rem;
+        color: black;">
+                    <a onclick="window.location.href = '/Home/Konular?id=@Alanlar.id';" data-toggle="collapse" data-target="#collapse-@Alanlar.id" aria-expanded="true" aria-controls="collapse-@Alanlar.id">
+
+                        <div class="card-header show-collapse" id="heading-@Alanlar.id" style="background: #b2bec3;">
+
+
+                            @i - @Alanlar.alanadi
+
+
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+</div>

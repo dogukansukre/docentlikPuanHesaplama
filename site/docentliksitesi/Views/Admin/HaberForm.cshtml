@@ -1,0 +1,25 @@
+﻿@model docentliksitesi.Models.EntityFramework.Haberler
+@{
+    ViewBag.Title = "HaberForm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Haberler</h2>
+@using (Html.BeginForm("Kaydethaber", "Admin", FormMethod.Post))
+{
+<div class="form-group">
+
+    @Html.LabelFor(m => m.haberbaslik)
+    @Html.TextBoxFor(m => m.haberbaslik, new { @class = "form-control" })
+
+    @Html.LabelFor(m => m.habericerik)
+    @Html.TextBoxFor(m => m.habericerik, new { @class = "form-control" })
+
+    @Html.LabelFor(m => m.haberlink)
+    @Html.TextBoxFor(m => m.haberlink, new { @class = "form-control" })
+
+
+</div>
+    @Html.HiddenFor(m => m.haberid)
+    <button type="submit" class="btn btn-success">Kaydet</button>
+}

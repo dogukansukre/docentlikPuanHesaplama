@@ -1,0 +1,30 @@
+﻿@using docentliksitesi.Models
+@model List<Haberler>
+@{
+    ViewBag.Title = "Haberler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Haberler</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>Haberler</td>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Haberler in Model)
+        {
+            <tr>
+                
+                <td><a href="/Home/Haberler?id=@Haberler.haberid">@Haberler.haberbaslik</a></td>
+
+            </tr>
+
+        }
+
+    </tbody>
+</table>

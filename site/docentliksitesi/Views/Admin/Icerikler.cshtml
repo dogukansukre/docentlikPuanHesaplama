@@ -1,0 +1,36 @@
+﻿@model List<docentliksitesi.Models.EntityFramework.İcerikler>
+@{
+    ViewBag.Title = "Icerikler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container">
+    @Html.ActionLink("Yeni İçerik", "Yeniicerik", null, new { @class = "btn btn-success" })
+</div>
+<h2>İçerikler Listesi</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Konu Ad</th>
+            <th>İçerik Ad</th>
+            <th>Puan</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    @foreach (var İcerikler in Model)
+    {
+        <tr>
+           
+            <td></td>
+
+            <td>@İcerikler.icerikadi</td>
+            <td>@İcerikler.puan</td>
+            <td><a class="btn btn-primary" href="/Admin/GuncelleIcerik/@İcerikler.id">Güncelle</a></td>
+            <td><a class="btn btn-danger" href="/Admin/SilIcerik/@İcerikler.id">Sil</a></td>
+        </tr>
+
+    }
+
+</table>

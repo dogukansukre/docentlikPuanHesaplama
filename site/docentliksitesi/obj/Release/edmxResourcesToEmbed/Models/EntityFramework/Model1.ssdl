@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="adilakin_tezModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="kullaniciAdi" Type="nvarchar(max)" />
+    <Property Name="sifre" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Alanlar">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="alanadi" Type="nchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Haberler">
+    <Key>
+      <PropertyRef Name="haberid" />
+    </Key>
+    <Property Name="haberid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="haberbaslik" Type="nvarchar(max)" />
+    <Property Name="habericerik" Type="nvarchar(max)" />
+    <Property Name="haberlink" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="İcerikler">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="icerikadi" Type="nvarchar" MaxLength="4000" />
+    <Property Name="puan" Type="int" />
+    <Property Name="konuid" Type="int" />
+    <Property Name="alanid" Type="int" />
+  </EntityType>
+  <EntityType Name="Konular">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="konuadi" Type="nvarchar" MaxLength="150" />
+    <Property Name="alanid" Type="int" />
+    <Property Name="ustlimit" Type="int" />
+  </EntityType>
+  <Association Name="FK_AlanlarKonular">
+    <End Role="Alanlar" Type="Self.Alanlar" Multiplicity="0..1" />
+    <End Role="Konular" Type="Self.Konular" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Alanlar">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Konular">
+        <PropertyRef Name="alanid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Konularİcerikler">
+    <End Role="Konular" Type="Self.Konular" Multiplicity="0..1" />
+    <End Role="İcerikler" Type="Self.İcerikler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Konular">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="İcerikler">
+        <PropertyRef Name="konuid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="adilakin_tezModelStoreContainer">
+    <EntitySet Name="admin" EntityType="Self.admin" Schema="adilakin_burakcan" store:Type="Tables" />
+    <EntitySet Name="Alanlar" EntityType="Self.Alanlar" Schema="adilakin_burakcan" store:Type="Tables" />
+    <EntitySet Name="Haberler" EntityType="Self.Haberler" Schema="adilakin_burakcan" store:Type="Tables" />
+    <EntitySet Name="İcerikler" EntityType="Self.İcerikler" Schema="adilakin_burakcan" store:Type="Tables" />
+    <EntitySet Name="Konular" EntityType="Self.Konular" Schema="adilakin_burakcan" store:Type="Tables" />
+    <AssociationSet Name="FK_AlanlarKonular" Association="Self.FK_AlanlarKonular">
+      <End Role="Alanlar" EntitySet="Alanlar" />
+      <End Role="Konular" EntitySet="Konular" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Konularİcerikler" Association="Self.FK_Konularİcerikler">
+      <End Role="Konular" EntitySet="Konular" />
+      <End Role="İcerikler" EntitySet="İcerikler" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

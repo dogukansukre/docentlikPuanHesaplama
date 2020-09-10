@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="tezModelStoreContainer" CdmEntityContainer="docentEntities">
+    <EntitySetMapping Name="admin">
+      <EntityTypeMapping TypeName="tezModel.admin">
+        <MappingFragment StoreEntitySet="admin">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="kullaniciAdi" ColumnName="kullaniciAdi" />
+          <ScalarProperty Name="sifre" ColumnName="sifre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Alanlar">
+      <EntityTypeMapping TypeName="tezModel.Alanlar">
+        <MappingFragment StoreEntitySet="Alanlar">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="alanadi" ColumnName="alanadi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="İcerikler">
+      <EntityTypeMapping TypeName="tezModel.İcerikler">
+        <MappingFragment StoreEntitySet="İcerikler">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="icerikadi" ColumnName="icerikadi" />
+          <ScalarProperty Name="puan" ColumnName="puan" />
+          <ScalarProperty Name="alanid" ColumnName="alanid" />
+          <ScalarProperty Name="kosulno" ColumnName="kosulno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Konular">
+      <EntityTypeMapping TypeName="tezModel.Konular">
+        <MappingFragment StoreEntitySet="Konular">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="konuadi" ColumnName="konuadi" />
+          <ScalarProperty Name="kosulno" ColumnName="kosulno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_Konular_Alanlar" TypeName="tezModel.FK_Konular_Alanlar" StoreEntitySet="Konular">
+      <EndProperty Name="Alanlar">
+        <ScalarProperty Name="id" ColumnName="alanid" />
+      </EndProperty>
+      <EndProperty Name="Konular">
+        <ScalarProperty Name="id" ColumnName="id" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="alanid" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_İcerikler_Konular" TypeName="tezModel.FK_İcerikler_Konular" StoreEntitySet="İcerikler">
+      <EndProperty Name="Konular">
+        <ScalarProperty Name="id" ColumnName="konuid" />
+      </EndProperty>
+      <EndProperty Name="İcerikler">
+        <ScalarProperty Name="id" ColumnName="id" />
+      </EndProperty>
+      <Condition IsNull="false" ColumnName="konuid" />
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
